@@ -1,0 +1,49 @@
+*.class
+transaction.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#source control files
+*.svn
+
+# Mac OSX
+.DS_Store
+
+# Windows
+Thumbs.db
+thumbs.db
+
+# IDEs
+.idea
+*.iml
+nbproject
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+atlassian-ide-plugin.xml
+*.swp
+*.out
+target
+target/*
+.setting/
+.settings/
+.project/
+*/.project
+.project
+.classpath
+projectFilesBackup/*
+*/.pydevproject
+.metadata/
+
+personal-api/src/main/webapp/node_modules
+personal-api/src/main/webapp/scripts/components
+dist
+.tmp
+.sass-cache
+
