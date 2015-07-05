@@ -1,0 +1,28 @@
+Wildfly JMS Clustering
+======================
+
+The point of this experiment is to:
+
+* have one .war file produce JMS messages
+* have a second war file listen and receive the JMS messages
+* run two Wildfly servers in clustered mode such that
+** messages produced on one server can be consumed on another server
+** both servers can produce messages with only one consuming them
+
+An added goal would be to: +
+have the both the producer and consumer run on both servers but configure HornetQ
+so that only one of the servers consumes messages at a time. I do not know yet if
+this is possible.
+
+To run the servers
+------------------
+server 1: +
+ ./standalone.sh -server-config server_01.xml -Djboss.socket.binding.port-offset=0
+
+server 2: +
+ ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1
+
+
+On OSX (and maybe linux), if you are running both servers on one machine
+you have to run the following command to set up a loopback route: +
+sudo route add 224.0.0.0 127.0.0.1 -netmask 240.0.0.0
