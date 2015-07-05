@@ -36,7 +36,7 @@ public class MessageProducerJob {
 		messageCount++;
 
 		String messageString = String.format("message number:%d from host:%s", messageCount, getHostName());
-		LOGGER.info(messageString);
+		LOGGER.info("sending {}", messageString);
 
 		context.createProducer().send(testQueue, messageString);
 	}
