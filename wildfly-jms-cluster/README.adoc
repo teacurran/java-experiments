@@ -22,6 +22,9 @@ server 1: +
 server 2: +
  ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1
 
+You can run both servers with the same installation of Wildfly but you must have a unique basedir.
+The easiest way to do this is copy the standalone directory and then add the following to startup: +
+ -Djboss.server.base.dir=/path/to/standalone
 
 On OSX (and maybe linux), if you are running both servers on one machine
 you have to run the following command to set up a loopback route: +
