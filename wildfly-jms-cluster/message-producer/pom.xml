@@ -28,45 +28,11 @@
 		</dependency>
 
 		<!-- Compile -->
-		<!-- DeltaSpike -->
-
 		<dependency>
-			<groupId>net.java.dev.inflector</groupId>
-			<artifactId>inflector</artifactId>
-			<version>0.7.0</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.0</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${version.junit}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian</groupId>
-			<artifactId>arquillian-bom</artifactId>
-			<version>${version.arquillian}</version>
-			<scope>test</scope>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-depchain</artifactId>
-			<scope>test</scope>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.wildfly</groupId>
-			<artifactId>wildfly-embedded</artifactId>
-			<version>${version.wildfly}</version>
-			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
@@ -115,7 +81,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 
 		<plugins>
 			<plugin>
