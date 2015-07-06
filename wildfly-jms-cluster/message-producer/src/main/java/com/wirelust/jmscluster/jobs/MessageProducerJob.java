@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import javax.annotation.Resource;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
@@ -25,8 +26,10 @@ public class MessageProducerJob {
 	@Resource(lookup = "java:/queue/test")
 	Queue testQueue;
 
+	// Injecting an instance because of:
+	// https://issues.jboss.org/browse/WFLY-3338
 	@Inject
-	JMSContext context;
+	Instance<JMSContext> jmsContextInstance;
 
 	String hostName;
 	int messageCount = 0;
@@ -38,6 +41,7 @@ public class MessageProducerJob {
 		String messageString = String.format("message number:%d from host:%s", messageCount, getHostName());
 		LOGGER.info("sending {}", messageString);
 
+		JMSContext context = jmsContextInstance.get();
 		context.createProducer().send(testQueue, messageString);
 	}
 
