@@ -1,0 +1,6 @@
+Java Experiments
+================
+
+This repository is for experiments or POC projects I am doing in the java space. 
+
+This will be used for posting test-code or configurations of concepts I am not able to find in any existing examples out there. These primarally focus on needs I run into during my professional work but if you see anything that is similar to what you are doing, feel free to ask questions.
