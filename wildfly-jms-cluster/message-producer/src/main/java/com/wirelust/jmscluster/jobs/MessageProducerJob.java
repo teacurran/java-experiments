@@ -38,7 +38,11 @@ public class MessageProducerJob {
 	public void createMessages() {
 		messageCount++;
 
-		String messageString = String.format("message number:%d from host:%s", messageCount, getHostName());
+		String messageString = String.format("message number:%d from host:%s node:%s",
+				messageCount,
+				getHostName(),
+				getNodeName());
+
 		LOGGER.info("sending {}", messageString);
 
 		JMSContext context = jmsContextInstance.get();
@@ -60,6 +64,11 @@ public class MessageProducerJob {
 		}
 
 		return hostName;
+	}
+
+	public String getNodeName() {
+
+		return System.getProperty("nodename");
 	}
 
 }

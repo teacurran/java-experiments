@@ -17,10 +17,10 @@ this is possible.
 To run the servers
 ------------------
 server 1: +
- ./standalone.sh -server-config server_01.xml -Djboss.socket.binding.port-offset=0
+ ./standalone.sh -server-config server_01.xml -Djboss.socket.binding.port-offset=0 -Dnodename=node1
 
 server 2: +
- ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1
+ ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1 -Dnodename=node2
 
 You can run both servers with the same installation of Wildfly but you must have a unique basedir.
 The easiest way to do this is copy the standalone directory and then add the following to startup: +
