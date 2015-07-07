@@ -34,7 +34,7 @@ public class MessageProducerJob {
 	String hostName;
 	int messageCount = 0;
 
-	@Schedule(hour = "*", minute = "*", second = "*/5")
+	@Schedule(hour = "*", minute = "*", second = "*/5", persistent = false)
 	public void createMessages() {
 		messageCount++;
 
