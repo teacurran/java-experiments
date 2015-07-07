@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>wildfly-hibernate-search-cluster</artifactId>
+		<groupId>com.wirelust.experiments.wildfly-hibernate-search-cluster</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>index-listener</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<webapp.dir>${project.build.directory}/${project.build.finalName}-exploded.war</webapp.dir>
+	</properties>
+
+	<dependencies>
+
+		<!--                       -->
+		<!-- Compile               -->
+		<!--                       -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version.slf4j}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!--                       -->
+		<!-- PROVIDED              -->
+		<!--                       -->
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-7.0</artifactId>
+			<scope>provided</scope>
+			<type>pom</type>
+		</dependency>
+
+		<!-- hibernate search -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${version.hibernate}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>${version.hibernate.search}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search-analyzers</artifactId>
+			<version>${version.hibernate.search}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search-infinispan</artifactId>
+			<version>${version.hibernate.search}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.infinispan</groupId>
+					<artifactId>infinispan-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate.common</groupId>
+					<artifactId>hibernate-commons-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+
+						<archive>
+							<manifestEntries>
+								<Specification-Title>${project.name}</Specification-Title>
+								<Specification-Version>${project.version}</Specification-Version>
+								<Implementation-Version>${build.number}</Implementation-Version>
+								<Implementation-Build>${buildNumber}</Implementation-Build>
+							</manifestEntries>
+						</archive>
+						<!--<warSourceExcludes>css/*,js/*,js/components/**/*</warSourceExcludes> -->
+						<!-- We're only handling CSS files now via the wro4j plugin, makes JS debugging easier.-->
+						<!--<warSourceExcludes>css/*</warSourceExcludes> -->
+						<webappDirectory>${webapp.dir}</webappDirectory>
+						<webResources>
+
+							<resource>
+								<directory>src/main/webapp</directory>
+								<filtering>false</filtering>
+								<excludes>
+									<exclude>**/*.less</exclude>
+									<exclude>**/*.html</exclude>
+								</excludes>
+							</resource>
+							<resource>
+								<directory>src/main/webapp</directory>
+								<filtering>true</filtering>
+								<includes>
+									<include>**/*.html</include>
+								</includes>
+							</resource>
+						</webResources>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<timestampFormat>yyyyMMddHHmmssSSS</timestampFormat>
+					<timestampPropertyName>releaseTimestamp</timestampPropertyName>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-embedded</artifactId>
+					<version>${version.wildfly}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>false</filtering>
+						<excludes>
+							<exclude>**/version.properties</exclude>
+						</excludes>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/version.properties</include>
+						</includes>
+					</resource>
+				</resources>
+				<testResources>
+					<testResource>
+						<directory>src/test/resources</directory>
+					</testResource>
+					<testResource>
+						<directory>src/test/resources-wildfly</directory>
+					</testResource>
+				</testResources>
+				<plugins>
+
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+
+							<archive>
+								<manifestEntries>
+									<Specification-Title>${project.name}</Specification-Title>
+									<Specification-Version>${project.version}</Specification-Version>
+									<Implementation-Version>${build.number}</Implementation-Version>
+									<Implementation-Build>${buildNumber}</Implementation-Build>
+								</manifestEntries>
+							</archive>
+							<webappDirectory>${webapp.dir}</webappDirectory>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.17</version>
+						<configuration>
+							<!-- Fork every test because it will launch a separate AS instance -->
+							<forkMode>always</forkMode>
+							<systemPropertyVariables>
+								<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+								<!-- the maven dependency plugin will have already downloaded the server on /target -->
+								<jboss.home>${project.basedir}/../target/wildfly-${version.wildfly}</jboss.home>
+								<module.path>${project.basedir}/../target/wildfly-${version.wildfly}/modules
+								</module.path>
+								<!-- Do not use ./test/resources-wildfly/configuration because jboss will write to the
+								config directory and we don't want these files to change -->
+								<jboss.server.config.dir>${project.basedir}/target/test-classes/configuration</jboss.server.config.dir>
+								<org.apache.deltaspike.ProjectStage>UnitTest</org.apache.deltaspike.ProjectStage>
+							</systemPropertyVariables>
+							<redirectTestOutputToFile>false</redirectTestOutputToFile>
+
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+</project>

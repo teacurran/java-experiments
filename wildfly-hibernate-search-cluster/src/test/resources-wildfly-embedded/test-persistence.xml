@@ -1,0 +1,127 @@
+<!-- Development mode JPA -->
+
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                       http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+
+	<persistence-unit name="litpro" transaction-type="JTA">
+
+		<jta-data-source>java:jboss/datasources/LitProTestDS</jta-data-source>
+
+		<class>com.scholastic.lf.data.model.Author</class>
+		<class>com.scholastic.lf.data.model.Benchmark</class>
+		<class>com.scholastic.lf.data.model.BookVersion</class>
+		<class>com.scholastic.lf.data.model.Book</class>
+		<class>com.scholastic.lf.data.model.BookAuthor</class>
+		<class>com.scholastic.lf.data.model.BookAuthorPK</class>
+		<class>com.scholastic.lf.data.model.BookTag</class>
+		<class>com.scholastic.lf.data.model.BookTagType</class>
+		<class>com.scholastic.lf.data.model.LFClass</class>
+		<class>com.scholastic.lf.data.model.LFClassSetting</class>
+		<class>com.scholastic.lf.data.model.CommandMessageThrottle</class>
+		<class>com.scholastic.lf.data.model.Country</class>
+		<class>com.scholastic.lf.data.model.DimClass</class>
+		<class>com.scholastic.lf.data.model.DimSchool</class>
+		<class>com.scholastic.lf.data.model.DimSchoolGroup</class>
+		<class>com.scholastic.lf.data.model.DimSchoolGroupSchool</class>
+		<class>com.scholastic.lf.data.model.DimSchoolGroupSchoolPK</class>
+		<class>com.scholastic.lf.data.model.DimStudent</class>
+		<class>com.scholastic.lf.data.model.ForecastLexileGrowth</class>
+		<class>com.scholastic.lf.data.model.ForecastLexileNorm</class>
+		<class>com.scholastic.lf.data.model.GeneratedIdEntity</class>
+		<class>com.scholastic.lf.data.model.Grade</class>
+		<class>com.scholastic.lf.data.model.GradeProficiency</class>
+		<class>com.scholastic.lf.data.model.GradeProficiencyBandPK</class>
+		<class>com.scholastic.lf.data.model.GradeSchoolGroupProficiency</class>
+		<class>com.scholastic.lf.data.model.GradeSchoolProficiency</class>
+		<class>com.scholastic.lf.data.model.ImportCategoryMapping</class>
+		<class>com.scholastic.lf.data.model.ImportSrcQuizRecord</class>
+		<class>com.scholastic.lf.data.model.ImportSrcQuizUpload</class>
+		<class>com.scholastic.lf.data.model.MsgStream</class>
+		<class>com.scholastic.lf.data.model.MsgTrackedMessage</class>
+		<class>com.scholastic.lf.data.model.ProficiencyBand</class>
+		<class>com.scholastic.lf.data.model.Region</class>
+		<class>com.scholastic.lf.data.model.School</class>
+		<class>com.scholastic.lf.data.model.SchoolBookUpload</class>
+		<class>com.scholastic.lf.data.model.SchoolBookUploadRecord</class>
+		<class>com.scholastic.lf.data.model.SchoolGroup</class>
+		<class>com.scholastic.lf.data.model.SchoolGroupSetting</class>
+		<class>com.scholastic.lf.data.model.SchoolSetting</class>
+		<class>com.scholastic.lf.data.model.ServerSetting</class>
+		<class>com.scholastic.lf.data.model.SlzUrl</class>
+		<class>com.scholastic.lf.data.model.SrcActivity</class>
+		<class>com.scholastic.lf.data.model.SrcActivityQuestion</class>
+		<class>com.scholastic.lf.data.model.SrcQuizQuestion</class>
+		<class>com.scholastic.lf.data.model.SrcQuiz</class>
+		<class>com.scholastic.lf.data.model.SriIssuedQuestion</class>
+		<class>com.scholastic.lf.data.model.SriIssuedTest</class>
+		<class>com.scholastic.lf.data.model.SriQuestion</class>
+		<class>com.scholastic.lf.data.model.Stanine</class>
+		<class>com.scholastic.lf.data.model.BookCategory</class>
+		<class>com.scholastic.lf.data.model.BookCategoryVariation</class>
+		<class>com.scholastic.lf.data.model.Language</class>
+		<class>com.scholastic.lf.data.model.User</class>
+		<class>com.scholastic.lf.data.model.UserBook</class>
+		<class>com.scholastic.lf.data.model.UserSetting</class>
+		<class>com.scholastic.lf.data.model.InterestLevel</class>
+		<class>com.scholastic.lf.data.model.InterestLevelRegionPK</class>		
+		<class>com.scholastic.lf.data.model.InterestLevelRegion</class>
+		<class>com.scholastic.lf.data.model.SchoolBookUploadFailedRecords</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<!-- Only included here because the data bootstrapper looks for a value in this property -->
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(schemaAction='drop,add',foreignKeys=true)"/>
+
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="true" />
+
+			<!-- <property name="hibernate.search.default.indexBase" value="./target/lucene_indexes" /> -->
+			<property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.impl.RAMDirectoryProvider"/>
+
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="litpro_reports" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/LitProReportsTestDS</jta-data-source>
+		
+		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForClass</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForGrade</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForSchool</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileBySchoolClassDate</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileBySchoolGradeDate</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForSchool</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForGrade</class>	
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForClass</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolGroupYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolYear</class>		
+		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolGradeYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportBookCompByClassYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolGroupYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolGradeYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyByClassYear</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForSchool</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForGrade</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForClass</class>	
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForSchool</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForGrade</class>
+		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForClass</class>			
+		<class>com.scholastic.lf.data.reporting.model.ReportStudentReportCard</class>				
+
+	
+		<properties>
+			<!-- Only included here because the data bootstrapper looks for a value in this property -->
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(schemaAction='drop,add',foreignKeys=true)"/>
+			
+			
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="true" />
+
+			<!-- <property name="hibernate.search.default.indexBase" value="./target/lucene_indexes" /> -->
+			<property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.impl.RAMDirectoryProvider"/>
+		</properties>
+	</persistence-unit>
+</persistence>

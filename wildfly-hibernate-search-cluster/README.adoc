@@ -1,0 +1,24 @@
+Wildfly Hibernate Search With Clustering
+======================
+
+The point of this experiment is to:
+
+* have hibernate search indexing model objects
+* have hibernate search events going to a JMS Queue
+* have an indexer application writing the lucene index to Infinispan
+
+To run the servers
+------------------
+server 1: +
+ ./standalone.sh -server-config server_01.xml -Djboss.socket.binding.port-offset=0 -Dnodename=node1
+
+server 2: +
+ ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1 -Dnodename=node2
+
+You can run both servers with the same installation of Wildfly but you must have a unique basedir.
+The easiest way to do this is copy the standalone directory and then add the following to startup: +
+ -Djboss.server.base.dir=/path/to/standalone
+
+On OSX (and maybe linux), if you are running both servers on one machine
+you have to run the following command to set up a loopback route: +
+sudo route add 224.0.0.0 127.0.0.1 -netmask 240.0.0.0
