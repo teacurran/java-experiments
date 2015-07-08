@@ -5,8 +5,6 @@
 	<persistence-unit name="experiment" transaction-type="JTA">
 		<jta-data-source>experiment</jta-data-source>
 
-		<class>com.wirelust.experiment.hibernatesearch.model.Book</class>
-
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 

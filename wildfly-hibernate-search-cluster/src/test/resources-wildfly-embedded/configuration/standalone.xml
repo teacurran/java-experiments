@@ -117,9 +117,6 @@
             <logger category="jacorb.config">
                 <level name="ERROR"/>
             </logger>
-      		<logger category="com.scholastic.lf.services.manager">
-        		<level name="DEBUG" />
-      		</logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -376,70 +373,10 @@
                     <jms-queue name="DLQ">
                         <entry name="java:/jms/queue/DLQ"/>
                     </jms-queue>
-                    <jms-queue name="importBookQueue">
-                        <entry name="queue/ImportBook"/>
-                        <entry name="java:jboss/exported/jms/queue/ImportBook"/>
+                    <jms-queue name="hibernatesearchQueue">
+                        <entry name="queue/hibernatesearch"/>
+                        <entry name="java:jboss/exported/jms/queue/hibernatesearch"/>
                     </jms-queue>
-                    <jms-queue name="exportBookQueue">
-                        <entry name="queue/ExportBook"/>
-                        <entry name="java:jboss/exported/jms/queue/ExportBook"/>
-                    </jms-queue>
-                    <jms-queue name="importLibraryQueue">
-                        <entry name="queue/ImportLibrary"/>
-                        <entry name="java:jboss/exported/jms/queue/ImportLibrary"/>
-                    </jms-queue>
-                    <jms-queue name="classReportQueue">
-                        <entry name="queue/ClassReport"/>
-                        <entry name="java:jboss/exported/jms/queue/ClassReport"/>
-                    </jms-queue>
-                    <jms-queue name="gradeReportQueue">
-                        <entry name="queue/GradeReport"/>
-                        <entry name="java:jboss/exported/jms/queue/GradeReport"/>
-                    </jms-queue>
-                    <jms-queue name="schoolReportQueue">
-                        <entry name="queue/SchoolReport"/>
-                        <entry name="java:jboss/exported/jms/queue/SchoolReport"/>
-                    </jms-queue>
-                    <jms-queue name="schoolGroupReportQueue">
-                        <entry name="queue/SchoolGroupReport"/>
-                        <entry name="java:jboss/exported/jms/queue/SchoolGroupReport"/>
-                    </jms-queue>
-                    <jms-queue name="studentReportQueue">
-                        <entry name="queue/StudentReport"/>
-                        <entry name="java:jboss/exported/jms/queue/StudentReport"/>
-                    </jms-queue>
-                    <jms-queue name="classSyncQueue">
-                        <entry name="queue/ClassSync"/>
-                        <entry name="java:jboss/exported/jms/queue/ClassSync"/>
-                    </jms-queue>
-                    <jms-queue name="gradeSyncQueue">
-                        <entry name="queue/GradeSync"/>
-                        <entry name="java:jboss/exported/jms/queue/GradeSync"/>
-                    </jms-queue>
-                    <jms-queue name="schoolSyncQueue">
-                        <entry name="queue/SchoolSync"/>
-                        <entry name="java:jboss/exported/jms/queue/SchoolSync"/>
-                    </jms-queue>
-                    <jms-queue name="schoolGroupSyncQueue">
-                        <entry name="queue/SchoolGroupSync"/>
-                        <entry name="java:jboss/exported/jms/queue/SchoolGroupSync"/>
-                    </jms-queue>
-                    <jms-queue name="bookCompSchoolGroupSync">
-                        <entry name="queue/BookCompSchoolGroupSync"/>
-                        <entry name="java:jboss/exported/jms/queue/BookCompSchoolGroupSync"/>
-                    </jms-queue>
-                    <jms-queue name="libraryMatchQueue">
-                        <entry name="queue/LibraryMatch"/>
-                        <entry name="java:jboss/exported/jms/queue/LibraryMatch"/>
-                    </jms-queue>
-                    <jms-topic name="userEventTopic">
-                        <entry name="topic/UserEvent"/>
-                        <entry name="java:jboss/exported/jms/topic/UserEvent"/>
-                    </jms-topic>
-                    <jms-topic name="jpaEventTopic">
-                        <entry name="topic/JpaEvent"/>
-                        <entry name="java:jboss/exported/jms/topic/JpaEvent"/>
-                    </jms-topic>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
@@ -540,7 +477,7 @@
         <interface name="unsecure">
             <!--
               ~  Used for IIOP sockets in the standard configuration.
-              ~                  To secure JacORB you need to setup SSL 
+              ~                  To secure JacORB you need to setup SSL
               -->
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
