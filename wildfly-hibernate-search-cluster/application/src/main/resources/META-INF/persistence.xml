@@ -3,7 +3,7 @@
                        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
 	<persistence-unit name="ExampleDS" transaction-type="JTA">
-		<jta-data-source>ExampleDS</jta-data-source>
+		<jta-data-source>jboss/datasources/ExampleDS</jta-data-source>
 
 		<class>com.wirelust.experiment.hibernatesearch.model.City</class>
 
@@ -16,10 +16,8 @@
 			<property name="hibernate.search.default.directory_provider" value="infinispan"/>
 			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.backend" value="jms" />
-			<property name="hibernate.search.default.worker.jms.connection_factory" value="java:/RemoteConnectionFactory"/>
-			<property name="hibernate.search.default.worker.jms.queue" value="/queue/hibernatesearch"/>
-			<property name="hibernate.search.default.worker.jms.login" value="hornet"/>
-			<property name="hibernate.search.default.worker.jms.password" value="p@ssw0rd"/>
+			<property name="hibernate.search.default.worker.jms.connection_factory" value="java:/ConnectionFactory"/>
+			<property name="hibernate.search.default.worker.jms.queue" value="/queue/HibernateSearch"/>
 			<property name="hibernate.search.default.worker.execution" value="sync"/>
 			<property name="hibernate.search.default.index_flush_interval" value="1000"/>
 			<property name="hibernate.search.default.worker.thread_pool.size" value="5"/>

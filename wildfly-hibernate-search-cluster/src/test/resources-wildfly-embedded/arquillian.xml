@@ -6,8 +6,4 @@
 
 	<defaultProtocol type="Servlet 3.0"/>
 
-	<extension qualifier="persistence">
-		<property name="defaultDataSource">java:jboss/datasources/LitProTestDS</property>
-	</extension>
-
 </arquillian>
