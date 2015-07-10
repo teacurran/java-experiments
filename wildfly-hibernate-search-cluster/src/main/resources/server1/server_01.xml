@@ -490,15 +490,6 @@
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
                 </security-domain>
-                <security-domain name="SLZRealm">
-                    <authentication>
-                        <login-module code="Database" flag="required">
-                            <module-option name="dsJndiName" value="java:jboss/datasources/slz-core-ds"/>
-                            <module-option name="principalsQuery" value="select user_credentials from product_auth_users where user_name = ?"/>
-                            <module-option name="rolesQuery" value="select role_name, 'Roles' from product_auth_roles where user_name = ?"/>
-                        </login-module>
-                    </authentication>
-                </security-domain>
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:transactions:2.0">

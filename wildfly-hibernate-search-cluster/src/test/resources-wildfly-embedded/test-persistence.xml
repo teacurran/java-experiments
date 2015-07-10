@@ -11,56 +11,11 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>
-			<!-- Only included here because the data bootstrapper looks for a value in this property -->
-			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(schemaAction='drop,add',foreignKeys=true)"/>
 
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />
 
-			<!-- <property name="hibernate.search.default.indexBase" value="./target/lucene_indexes" /> -->
-			<property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.impl.RAMDirectoryProvider"/>
-
 		</properties>
 	</persistence-unit>
 
-	<persistence-unit name="litpro_reports" transaction-type="JTA">
-		<jta-data-source>java:jboss/datasources/LitProReportsTestDS</jta-data-source>
-
-		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForClass</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForGrade</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportExpectedLexileGrowthForSchool</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileBySchoolClassDate</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileBySchoolGradeDate</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForSchool</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForGrade</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileVsGradeNormLexileForClass</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolGroupYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportBookCompBySchoolGradeYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportBookCompByClassYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolGroupYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyBySchoolGradeYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyByClassYear</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForSchool</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForGrade</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportReadingProficiencyForClass</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForSchool</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForGrade</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportLexileGrowthForClass</class>
-		<class>com.scholastic.lf.data.reporting.model.ReportStudentReportCard</class>
-
-
-		<properties>
-			<!-- Only included here because the data bootstrapper looks for a value in this property -->
-			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(schemaAction='drop,add',foreignKeys=true)"/>
-
-
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.show_sql" value="true" />
-
-			<!-- <property name="hibernate.search.default.indexBase" value="./target/lucene_indexes" /> -->
-			<property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.impl.RAMDirectoryProvider"/>
-		</properties>
-	</persistence-unit>
 </persistence>
