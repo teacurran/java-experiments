@@ -15,7 +15,22 @@ import org.hibernate.search.stat.Statistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.hornetq.api.core.management.MessageCounterInfo;
+import org.hornetq.api.core.management.ObjectNameBuilder;
+import org.hornetq.api.jms.management.JMSQueueControl;
+
+import javax.annotation.Resource;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.Queue;
+import javax.management.MBeanServerConnection;
+import javax.management.MBeanServerInvocationHandler;
+import javax.management.ObjectName;
+import javax.management.remote.JMXConnector;
+import javax.management.remote.JMXConnectorFactory;
+import javax.management.remote.JMXServiceURL;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -43,8 +58,18 @@ public class DataResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataResource.class);
 
+	private static final String JMX_URL = "service:jmx:rmi:///jndi/rmi://localhost:3001/jmxrmi";
+
 	@Inject
 	EntityManager em;
+
+	@Resource(lookup = "java:/queue/HibernateSearch")
+	Queue hibernateSearchQueue;
+
+	// Injecting an instance because of:
+	// https://issues.jboss.org/browse/WFLY-3338
+	@Inject
+	Instance<JMSContext> jmsContextInstance;
 
 	@GET
 	@Path("/bootstrap")
@@ -119,12 +144,31 @@ public class DataResource {
 		results.put("db-count", count);
 
 
+		long queueLength = -1;
+		try {
+			ObjectName on = ObjectNameBuilder.DEFAULT.getJMSQueueObjectName(hibernateSearchQueue.getQueueName());
+			JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(JMX_URL), new HashMap<String,
+				Object>());
+			MBeanServerConnection mbsc = connector.getMBeanServerConnection();
+			JMSQueueControl queueControl = MBeanServerInvocationHandler.newProxyInstance(mbsc, on, JMSQueueControl
+				.class, false);
+
+			// Step 8. List the message counters and convert them to MessageCounterInfo data structure.
+			String counters = queueControl.listMessageCounter();
+			MessageCounterInfo messageCounter = MessageCounterInfo.fromJSON(counters);
+
+			queueLength = messageCounter.getCount();
+		} catch (Exception e) {
+			LOGGER.error("error reading queue length", e);
+		}
+		results.put("queue-length", queueLength);
+
+
 		// count how many items are in the full text index
 		FullTextEntityManager fullTextEntityManager =
 			org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
 		SearchFactory searchFactory = fullTextEntityManager.getSearchFactory();
 		Statistics statistics = searchFactory.getStatistics();
-
 		results.put("full-text-count", (long)statistics.getNumberOfIndexedEntities(City.class.getName()));
 
 		return Response.status(Response.Status.OK).entity(results).build();
