@@ -6,10 +6,12 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.lucene.search.Query;
+import org.hibernate.search.SearchFactory;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.search.stat.Statistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -97,4 +100,35 @@ public class DataResource {
 
 		return Response.status(Response.Status.OK).entity(result).build();
 	}
+
+	@GET
+	@Path("/stats")
+	public Response stats() {
+
+		HashMap<String, Long> results = new HashMap<>();
+
+		// count how many items are in the database
+		javax.persistence.Query countQuery = em.createQuery("SELECT count(c) FROM City c");
+		Object result = countQuery.getSingleResult();
+		long count = 0;
+		if (result instanceof Integer) {
+			count = (Integer)result;
+		} else if (result instanceof Long) {
+			count = (Long)result;
+		}
+		results.put("db-count", count);
+
+
+		// count how many items are in the full text index
+		FullTextEntityManager fullTextEntityManager =
+			org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
+		SearchFactory searchFactory = fullTextEntityManager.getSearchFactory();
+		Statistics statistics = searchFactory.getStatistics();
+
+		results.put("full-text-count", (long)statistics.getNumberOfIndexedEntities(City.class.getName()));
+
+		return Response.status(Response.Status.OK).entity(results).build();
+
+	}
+
 }

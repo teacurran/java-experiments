@@ -16,7 +16,7 @@ import org.hibernate.search.backend.impl.jms.AbstractJMSHibernateSearchControlle
  */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName="destination", propertyValue="queue/hibernatesearch")
+		@ActivationConfigProperty(propertyName="destination", propertyValue="queue/HibernateSearch")
 })
 public class HibernateSearchIndexer extends AbstractJMSHibernateSearchController implements MessageListener {
 

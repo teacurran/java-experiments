@@ -40,6 +40,7 @@
 	<modules>
 		<module>application</module>
 		<module>index-listener</module>
+		<module>core</module>
 	</modules>
 
 	<dependencyManagement>

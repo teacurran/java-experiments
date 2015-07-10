@@ -1,5 +1,6 @@
 package com.wirelust.experiment.hibernatesearch.model;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ import org.hibernate.search.annotations.Store;
 @Table(name = "cities")
 @Indexed
 @Cacheable
-public class City {
+public class City implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

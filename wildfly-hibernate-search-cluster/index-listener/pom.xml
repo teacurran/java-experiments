@@ -17,6 +17,13 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>com.wirelust.experiments.wildfly-hibernate-search-cluster</groupId>
+			<artifactId>core</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<!--                       -->
 		<!-- Compile               -->
 		<!--                       -->
