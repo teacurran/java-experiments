@@ -4,7 +4,6 @@ import com.wirelust.experiment.hibernatesearch.model.City;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.io.input.BOMInputStream;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.SearchFactory;
 import org.hibernate.search.jpa.FullTextEntityManager;
@@ -23,7 +22,6 @@ import javax.annotation.Resource;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
-import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.management.MBeanServerConnection;
 import javax.management.MBeanServerInvocationHandler;
@@ -32,8 +30,6 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -58,7 +54,10 @@ public class DataResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataResource.class);
 
-	private static final String JMX_URL = "service:jmx:rmi:///jndi/rmi://localhost:3001/jmxrmi";
+	private static final String JMX_HOST = "localhost";
+	private static final int JMX_PORT = 9990;  // management-web port
+	String JMX_URL = System.getProperty("jmx.service.url", "service:jmx:http-remoting-jmx://" + JMX_HOST + ":" +
+		JMX_PORT);
 
 	@Inject
 	EntityManager em;
@@ -150,8 +149,8 @@ public class DataResource {
 			JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(JMX_URL), new HashMap<String,
 				Object>());
 			MBeanServerConnection mbsc = connector.getMBeanServerConnection();
-			JMSQueueControl queueControl = MBeanServerInvocationHandler.newProxyInstance(mbsc, on, JMSQueueControl
-				.class, false);
+			JMSQueueControl queueControl = MBeanServerInvocationHandler.newProxyInstance(mbsc, on,
+				JMSQueueControl.class, false);
 
 			// Step 8. List the message counters and convert them to MessageCounterInfo data structure.
 			String counters = queueControl.listMessageCounter();
