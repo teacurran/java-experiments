@@ -143,7 +143,8 @@ public class DataResource {
 		results.put("db-count", count);
 
 
-		long queueLength = -1;
+		long queueDepth = -1;
+		long queueCount = -1;
 		try {
 			ObjectName on = ObjectNameBuilder.DEFAULT.getJMSQueueObjectName(hibernateSearchQueue.getQueueName());
 			JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(JMX_URL), new HashMap<String,
@@ -156,11 +157,13 @@ public class DataResource {
 			String counters = queueControl.listMessageCounter();
 			MessageCounterInfo messageCounter = MessageCounterInfo.fromJSON(counters);
 
-			queueLength = messageCounter.getCount();
+			queueDepth = messageCounter.getDepth();
+			queueCount = messageCounter.getCount();
 		} catch (Exception e) {
 			LOGGER.error("error reading queue length", e);
 		}
-		results.put("queue-length", queueLength);
+		results.put("queue-count", queueCount);
+		results.put("queue-depth", queueDepth);
 
 
 		// count how many items are in the full text index

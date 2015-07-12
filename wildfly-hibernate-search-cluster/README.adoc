@@ -22,3 +22,11 @@ The easiest way to do this is copy the standalone directory and then add the fol
 On OSX (and maybe linux), if you are running both servers on one machine
 you have to run the following command to set up a loopback route: +
 sudo route add 224.0.0.0 127.0.0.1 -netmask 240.0.0.0
+
+Application
+-------------------
+
+http://127.0.0.1:8080/application/api/v1/data/bootstrap
+
+http://127.0.0.1:8080/application/api/v1/data/stats
+
