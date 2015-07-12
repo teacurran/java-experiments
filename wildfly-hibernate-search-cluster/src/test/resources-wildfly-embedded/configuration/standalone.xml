@@ -83,6 +83,7 @@
             </role-mapping>
         </access-control>
     </management>
+
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:2.0">
             <console-handler name="CONSOLE">
@@ -116,6 +117,9 @@
             </logger>
             <logger category="jacorb.config">
                 <level name="ERROR"/>
+            </logger>
+            <logger category="com.wirelust">
+                <level name="DEBUG"/>
             </logger>
             <root-logger>
                 <level name="INFO"/>
@@ -300,6 +304,7 @@
         <subsystem xmlns="urn:jboss:domain:messaging:2.0">
             <hornetq-server>
                 <journal-file-size>102400</journal-file-size>
+                <jmx-management-enabled>true</jmx-management-enabled>
                 <connectors>
                     <http-connector name="http-connector" socket-binding="http">
                         <param key="http-upgrade-endpoint" value="http-acceptor"/>
@@ -374,8 +379,8 @@
                         <entry name="java:/jms/queue/DLQ"/>
                     </jms-queue>
                     <jms-queue name="hibernatesearchQueue">
-                        <entry name="queue/hibernatesearch"/>
-                        <entry name="java:jboss/exported/jms/queue/hibernatesearch"/>
+                        <entry name="queue/HibernateSearch"/>
+                        <entry name="java:jboss/exported/jms/queue/HibernateSearch"/>
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>
@@ -411,15 +416,6 @@
                     <authorization>
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
-                </security-domain>
-                <security-domain name="SLZRealm">
-                    <authentication>
-                        <login-module code="Database" flag="required">
-                            <module-option name="dsJndiName" value="java:jboss/datasources/slz-core-ds"/>
-                            <module-option name="principalsQuery" value="select user_credentials from product_auth_users where user_name = ?"/>
-                            <module-option name="rolesQuery" value="select role_name, 'Roles' from product_auth_roles where user_name = ?"/>
-                        </login-module>
-                    </authentication>
                 </security-domain>
             </security-domains>
         </subsystem>
@@ -466,6 +462,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:2.0"/>
     </profile>
+
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:127.0.0.1}"/>
@@ -482,6 +479,7 @@
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
     </interfaces>
+
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>

@@ -341,7 +341,7 @@
                 <clustered>true</clustered>
                 <cluster-password>hornet_password</cluster-password>
                 <journal-file-size>102400</journal-file-size>
-
+                <jmx-management-enabled>true</jmx-management-enabled>
                 <connectors>
                     <http-connector name="http-connector" socket-binding="http">
                         <param key="http-upgrade-endpoint" value="http-acceptor"/>
@@ -447,6 +447,10 @@
                     <jms-queue name="testQueue">
                         <entry name="queue/test"/>
                         <entry name="java:jboss/exported/jms/queue/test"/>
+                    </jms-queue>
+                    <jms-queue name="hibernatesearchQueue">
+                        <entry name="queue/HibernateSearch"/>
+                        <entry name="java:jboss/exported/jms/queue/HibernateSearch"/>
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>
