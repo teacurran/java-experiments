@@ -7,6 +7,10 @@ The point of this experiment is to:
 * have hibernate search events going to a JMS Queue
 * have an indexer application writing the lucene index to Infinispan
 
+*Note! This application isn't working yet. It writes to the database and +
+JMS Queue but is not writing to the infinispan index yet.*
+
+
 To run the servers
 ------------------
 server 1: +
