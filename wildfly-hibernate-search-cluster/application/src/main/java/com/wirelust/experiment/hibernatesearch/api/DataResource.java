@@ -1,6 +1,7 @@
 package com.wirelust.experiment.hibernatesearch.api;
 
 import com.wirelust.experiment.hibernatesearch.model.City;
+import com.wirelust.experiment.hibernatesearch.repositories.CityRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -31,6 +32,7 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -49,7 +51,6 @@ import java.util.List;
  */
 @Path("/data")
 @Produces(MediaType.APPLICATION_JSON)
-@Transactional
 public class DataResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataResource.class);
@@ -70,6 +71,9 @@ public class DataResource {
 	@Inject
 	Instance<JMSContext> jmsContextInstance;
 
+	@Inject
+	CityRepository cityRepository;
+
 	@GET
 	@Path("/bootstrap")
 	public Response bootstrap() {
@@ -88,7 +92,7 @@ public class DataResource {
 				city.setLocode(record.get("LOCODE"));
 				city.setName(record.get("NAME"));
 				city.setState(record.get("STATE"));
-				em.persist(city);
+				cityRepository.save(city);
 			}
 
 		} catch (Exception e) {
@@ -100,6 +104,7 @@ public class DataResource {
 
 	@GET
 	@Path("/search")
+	@Transactional
 	public Response search(
 			@QueryParam("q")
 			final String queryString
@@ -127,6 +132,7 @@ public class DataResource {
 
 	@GET
 	@Path("/stats")
+	@Transactional
 	public Response stats() {
 
 		HashMap<String, Long> results = new HashMap<>();
