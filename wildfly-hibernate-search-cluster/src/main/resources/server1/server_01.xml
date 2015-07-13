@@ -147,7 +147,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:2.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <connection-url>jdbc:h2:../standalone/data/h2/exampledb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
                     <driver>h2</driver>
                     <security>
                         <user-name>sa</user-name>
@@ -265,13 +265,6 @@
             <cache-container name="hibernateSearch" default-cache="LuceneIndexesData"
 							 jndi-name="java:jboss/infinispan/hibernateSearch" start="EAGER"
 							 module="org.wildfly.clustering.ejb.infinispan">
-                <local-cache name="LuceneIndexesData">
-                    <file-store passivation="false" purge="false"/>
-                </local-cache>
-                <local-cache name="LuceneIndexesMetadata">
-                    <file-store preload="true" passivation="false" purge="false"/>
-                </local-cache>
-                <local-cache name="LuceneIndexesLocking"/>
 
 				<transport lock-timeout="330000"/>
 				<replicated-cache name="LuceneIndexesMetadata" start="EAGER" mode="SYNC" remote-timeout="330000">
@@ -281,7 +274,7 @@
 					<expiration max-idle="-1"/>
 					<state-transfer enabled="true" timeout="480000"/>
 					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
-								path="../namespaces/mc/infinispan-file-store">
+								path="standalone/data/infinispan-file-store">
 						<write-behind/>
 					</file-store>
 					<indexing index="NONE"/>
@@ -293,7 +286,7 @@
 					<expiration max-idle="-1"/>
 					<state-transfer enabled="true" timeout="480000"/>
 					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
-								path="../namespaces/mc/infinispan-file-store">
+								path="standalone/data/infinispan-file-store">
 						<write-behind/>
 					</file-store>
 					<indexing index="NONE"/>

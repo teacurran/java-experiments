@@ -33,7 +33,7 @@
 			<property name="hibernate.search.default.indexwriter.merge_max_size" value="1024"/>
 			<property name="hibernate.search.default.indexwriter.ram_buffer_size" value="256"/>
 
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 
 		</properties>
