@@ -259,6 +259,16 @@
                     <eviction strategy="NONE"/>
                 </local-cache>
             </cache-container>
+
+            <cache-container name="hibernateSearch" default-cache="LuceneIndexesData" jndi-name="java:jboss/infinispan/hibernateSearch" start="EAGER">
+                <local-cache name="LuceneIndexesData">
+                    <file-store passivation="false" purge="false"/>
+                </local-cache>
+                <local-cache name="LuceneIndexesMetadata">
+                    <file-store preload="true" passivation="false" purge="false"/>
+                </local-cache>
+                <local-cache name="LuceneIndexesLocking"/>
+            </cache-container>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jacorb:1.3">
             <orb socket-binding="jacorb" ssl-socket-binding="jacorb-ssl">
