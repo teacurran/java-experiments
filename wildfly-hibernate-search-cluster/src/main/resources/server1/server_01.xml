@@ -262,7 +262,9 @@
                 </replicated-cache>
             </cache-container>
 
-            <cache-container name="hibernateSearch" default-cache="LuceneIndexesData" jndi-name="java:jboss/infinispan/hibernateSearch" start="EAGER">
+            <cache-container name="hibernateSearch" default-cache="LuceneIndexesData"
+							 jndi-name="java:jboss/infinispan/hibernateSearch" start="EAGER"
+							 module="org.wildfly.clustering.ejb.infinispan">
                 <local-cache name="LuceneIndexesData">
                     <file-store passivation="false" purge="false"/>
                 </local-cache>
@@ -270,7 +272,43 @@
                     <file-store preload="true" passivation="false" purge="false"/>
                 </local-cache>
                 <local-cache name="LuceneIndexesLocking"/>
-            </cache-container>
+
+				<transport lock-timeout="330000"/>
+				<replicated-cache name="LuceneIndexesMetadata" start="EAGER" mode="SYNC" remote-timeout="330000">
+					<locking striping="false" acquire-timeout="330000" concurrency-level="500"/>
+					<transaction mode="NONE"/>
+					<eviction strategy="NONE" max-entries="-1"/>
+					<expiration max-idle="-1"/>
+					<state-transfer enabled="true" timeout="480000"/>
+					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
+								path="../namespaces/mc/infinispan-file-store">
+						<write-behind/>
+					</file-store>
+					<indexing index="NONE"/>
+				</replicated-cache>
+				<replicated-cache name="LuceneIndexesData" start="EAGER" mode="SYNC" remote-timeout="25000">
+					<locking striping="false" acquire-timeout="330000" concurrency-level="500"/>
+					<transaction mode="NONE"/>
+					<eviction strategy="NONE" max-entries="-1"/>
+					<expiration max-idle="-1"/>
+					<state-transfer enabled="true" timeout="480000"/>
+					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
+								path="../namespaces/mc/infinispan-file-store">
+						<write-behind/>
+					</file-store>
+					<indexing index="NONE"/>
+				</replicated-cache>
+				<replicated-cache name="LuceneIndexesLocking" start="EAGER" mode="SYNC" remote-timeout="25000">
+					<locking striping="false" acquire-timeout="330000" concurrency-level="500"/>
+					<transaction mode="NONE"/>
+					<eviction strategy="NONE" max-entries="-1"/>
+					<expiration max-idle="-1"/>
+					<state-transfer enabled="true" timeout="480000"/>
+					<indexing index="NONE"/>
+				</replicated-cache>
+
+			</cache-container>
+
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jacorb:1.3">
             <orb socket-binding="jacorb" ssl-socket-binding="jacorb-ssl">
