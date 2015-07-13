@@ -14,6 +14,12 @@
 
 			<!-- Hibernate Search -->
 			<property name="hibernate.search.default.directory_provider" value="infinispan"/>
+			<property name="hibernate.search.infinispan.cachemanager_jndiname"
+					  value="java:jboss/infinispan/hibernateSearch"/>
+			<!--
+			<property name="hibernate.search.infinispan.configuration_resourcename"
+					  value="default-hibernatesearch-infinispan.xml"/>
+			-->
 			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.execution" value="sync"/>
 			<property name="hibernate.search.default.index_flush_interval" value="1000"/>

@@ -14,6 +14,13 @@
 
 			<!-- Hibernate Search -->
 			<property name="hibernate.search.default.directory_provider" value="infinispan"/>
+			<property name="hibernate.search.default.exclusive_index_use" value="true"/>
+			<property name="hibernate.search.infinispan.cachemanager_jndiname"
+					  value="java:jboss/infinispan/hibernateSearch"/>
+			<!--
+			<property name="hibernate.search.infinispan.configuration_resourcename"
+					  value="default-hibernatesearch-infinispan.xml"/>
+			-->
 			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.backend" value="jms" />
 			<property name="hibernate.search.default.worker.jms.connection_factory" value="java:/ConnectionFactory"/>
