@@ -16,7 +16,7 @@
 			<property name="hibernate.search.default.directory_provider" value="infinispan"/>
 			<property name="hibernate.search.default.exclusive_index_use" value="true"/>
 			<property name="hibernate.search.infinispan.cachemanager_jndiname"
-					  value="java:jboss/infinispan/hibernateSearch"/>
+					  value="java:jboss/infinispan/container/hibernateSearch"/>
 			<!--
 			<property name="hibernate.search.infinispan.configuration_resourcename"
 					  value="default-hibernatesearch-infinispan.xml"/>

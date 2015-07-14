@@ -10,10 +10,20 @@ The point of this experiment is to:
 To run the servers
 ------------------
 server 1: +
- ./standalone.sh -server-config server_01.xml -Djboss.socket.binding.port-offset=0 -Dnodename=node1
+ ./standalone.sh -server-config server_01.xml \+
+ -Djboss.socket.binding.port-offset=0 \+
+ -Djboss.node.name=server1 \+
+ -b 127.0.0.1 \+
+ -u 230.0.0.4
+
+-b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
 
 server 2: +
- ./standalone.sh -server-config server_02.xml -Djboss.socket.binding.port-offset=1 -Dnodename=node2
+ ./standalone.sh -server-config server_01.xml \+
+ -Djboss.socket.binding.port-offset=100 \+
+ -Djboss.node.name=server2 \+
+ -b 127.0.0.1 \+
+ -u 230.0.0.4
 
 You can run both servers with the same installation of Wildfly but you must have a unique basedir.
 The easiest way to do this is copy the standalone directory and then add the following to startup: +
@@ -21,7 +31,12 @@ The easiest way to do this is copy the standalone directory and then add the fol
 
 On OSX (and maybe linux), if you are running both servers on one machine
 you have to run the following command to set up a loopback route: +
-sudo route add 224.0.0.0 127.0.0.1 -netmask 240.0.0.0
+ sudo route add 224.0.0.0 127.0.0.1 -netmask 240.0.0.0
+
+I also ran into an interesting thing to watch out for. If one server is running IPv4 and the other is running IPv6
+JGroups will fail to link them. For some reason my IDE was running IPv6 and the CLI was running v4. To fix this you
+can use the following command line switch: +
+-Djava.net.preferIPv4Stack=true
 
 Application
 -------------------
