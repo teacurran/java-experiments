@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
  */
 public class EntityManagerProducer {
 
-	@PersistenceContext(unitName = "ExampleDS")
+	@PersistenceContext
 	private EntityManager entityManager;
 
 

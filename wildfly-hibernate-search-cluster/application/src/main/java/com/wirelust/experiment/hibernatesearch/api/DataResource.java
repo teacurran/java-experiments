@@ -6,6 +6,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.lucene.search.Query;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.MassIndexer;
 import org.hibernate.search.SearchFactory;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -98,6 +100,21 @@ public class DataResource {
 		} catch (Exception e) {
 			LOGGER.error("Fatal error", e);
 		}
+
+		return Response.status(Response.Status.NO_CONTENT).build();
+	}
+
+	@GET
+	@Path("/reindex")
+	public Response reindex() throws InterruptedException {
+
+		LOGGER.info("Reindexing application");
+
+		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+		fullTextEntityManager.flushToIndexes();
+
+		MassIndexer indexer = fullTextEntityManager.createIndexer(City.class);
+		indexer.startAndWait();
 
 		return Response.status(Response.Status.NO_CONTENT).build();
 	}
