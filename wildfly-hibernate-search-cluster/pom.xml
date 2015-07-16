@@ -28,8 +28,8 @@
 		<version.deltaspike>1.4.1</version.deltaspike>
 		<version.ee7>1.0.2.Final</version.ee7>
 		<version.findbugs>3.0.0</version.findbugs>
-		<version.hibernate>4.0.1.Final</version.hibernate>
-		<version.hibernate.search>4.5.1.Final</version.hibernate.search>
+		<version.hibernate>4.3.10.Final</version.hibernate>
+		<version.hibernate.search>5.2.0.Final</version.hibernate.search>
 		<version.maven.compiler>2.5.1</version.maven.compiler>
 		<version.maven.war>2.6</version.maven.war>
 		<version.junit>4.12</version.junit>
