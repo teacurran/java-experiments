@@ -270,10 +270,12 @@
 					<eviction strategy="NONE" max-entries="-1"/>
 					<expiration max-idle="-1"/>
 					<state-transfer enabled="true" timeout="480000"/>
+					<!-- File store isn't working with Hibernate Search in Wldfly 9. I am not sure why
 					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
 								path="standalone/data/infinispan-file-store">
 						<write-behind/>
 					</file-store>
+					-->
 					<indexing index="NONE"/>
 				</replicated-cache>
 				<replicated-cache name="LuceneIndexesData" mode="SYNC" remote-timeout="25000">
@@ -282,10 +284,12 @@
 					<eviction strategy="NONE" max-entries="-1"/>
 					<expiration max-idle="-1"/>
 					<state-transfer enabled="true" timeout="480000"/>
+					<!-- File store isn't working with Hibernate Search in Wldfly 9. I am not sure why
 					<file-store preload="true" purge="false" passivation="false" relative-to="jboss.home.dir"
 								path="standalone/data/infinispan-file-store">
 						<write-behind/>
 					</file-store>
+					-->
 					<indexing index="NONE"/>
 				</replicated-cache>
 				<replicated-cache name="LuceneIndexesLocking" mode="SYNC" remote-timeout="25000">
