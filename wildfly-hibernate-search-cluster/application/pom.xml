@@ -81,6 +81,41 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Included for IDE debugging, not used in source -->
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-clustering-infinispan-extension</artifactId>
+			<version>9.0.0.Final</version>
+			<type>jar</type>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.resteasy</groupId>
+					<artifactId>resteasy-jaxrs</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-clustering-infinispan-spi</artifactId>
+			<version>9.0.0.Final</version>
+			<type>jar</type>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.resteasy</groupId>
+					<artifactId>resteasy-jaxrs</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-clustering-server</artifactId>
+			<version>9.0.0.Final</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-7.0</artifactId>
