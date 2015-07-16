@@ -6,8 +6,10 @@ import javax.jms.MessageListener;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Session;
 import org.hibernate.search.backend.impl.jms.AbstractJMSHibernateSearchController;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.spi.SearchIntegrator;
 
 /**
  * Date: 05-Jul-2015
@@ -24,11 +26,9 @@ public class HibernateSearchIndexer extends AbstractJMSHibernateSearchController
 	EntityManager em;
 
 	@Override
-	protected Session getSession() {
-		return em.unwrap(Session.class);
-	}
-
-	protected void cleanSessionIfNeeded(Session session) {
+	protected SearchIntegrator getSearchIntegrator() {
+		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+		return fullTextEntityManager.getSearchFactory().unwrap(SearchIntegrator.class);
 	}
 }
 
