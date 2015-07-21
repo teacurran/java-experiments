@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar version="3.1"
+		 xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                          http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd">
+
+	<enterprise-beans>
+		<message-driven>
+			<ejb-name>JMSListenerMDB</ejb-name>
+			<ejb-class>com.wirelust.jmscluster.mdb.JMSListener</ejb-class>
+			<transaction-type>Container</transaction-type>
+			<message-destination-type>javax.jms.Queue</message-destination-type>
+
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>acknowledgeMode</activation-config-property-name>
+					<activation-config-property-value>AUTO_ACKNOWLEDGE</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destination</activation-config-property-name>
+					<activation-config-property-value>java:/queue/test2</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven>
+
+	</enterprise-beans>
+
+</ejb-jar>
+
+
+

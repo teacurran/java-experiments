@@ -1,0 +1,17 @@
+MDB Scanning Test
+======================
+
+Test for response to thread:
+https://developer.jboss.org/thread/261345?sr=inbox&ru=104323
+
+
+The point of this experiment is to:
+
+* have one .war file produce JMS messages on 2 different queues: queue/test, queue/test2
+* have a second war file listen and receive the JMS messages
+* one of the queues will be read by an Annotated listener
+* ther other queue will be read by a listener configured with ejb-jar.xml
+
+
+*Tested on JBoss AS 7.1.1*
+
