@@ -4,8 +4,10 @@
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		 version="3.0">
 
+	<!--
 	<resource-ref>
 		<res-ref-name>infinispan/container/hibernateSearch</res-ref-name>
 		<lookup-name>java:jboss/infinispan/container/hibernateSearch</lookup-name>
 	</resource-ref>
+	-->
 </web-app>

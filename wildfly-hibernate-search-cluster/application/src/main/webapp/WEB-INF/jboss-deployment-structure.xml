@@ -6,9 +6,12 @@
 			<module name="com.h2database.h2"/>
 
 			<module name="org.hibernate" services="export"/>
-			<module name="org.hibernate.search.engine" services="export"/>
-			<module name="org.hibernate.search.orm" services="export"/>
-			<module name="org.infinispan" services="export"/>
+			<module name="org.hibernate.search.engine" services="export" slot="5.2.0.Final"/>
+			<module name="org.hibernate.search.orm" services="export" slot="5.2.0.Final"/>
+			<module name="org.hibernate.search.backend-jms" services="export" slot="5.2.0.Final"/>
+
+			<module name="org.infinispan" services="export" slot="ispn-7.2"/>
+
 			<module name="org.jboss.remoting-jmx" services="export"/>
 
 			<module name="org.jboss.resteasy.resteasy-cdi"/>

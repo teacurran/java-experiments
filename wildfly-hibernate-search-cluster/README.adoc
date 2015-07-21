@@ -10,7 +10,7 @@ The point of this experiment is to:
 To run the servers
 ------------------
 server 1: +
- ./standalone.sh -server-config server_01.xml \+
+ ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=0 \+
  -Djboss.node.name=server1 \+
  -b 127.0.0.1 \+
@@ -19,7 +19,7 @@ server 1: +
 -b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
 
 server 2: +
- ./standalone.sh -server-config server_01.xml \+
+ ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=100 \+
  -Djboss.node.name=server2 \+
  -b 127.0.0.1 \+
