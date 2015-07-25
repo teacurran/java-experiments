@@ -1,0 +1,11 @@
+{
+	"users": [
+		{
+			"user_id": 1,
+			"name": "Chris Rivers",
+			"mention_name": "chris",
+			"email": "chris@hipchat.com",
+			"title": "Developer"
+		}
+	]
+}
