@@ -112,6 +112,9 @@
 			<logger category="sun.rmi">
 				<level name="WARN"/>
 			</logger>
+			<logger category="org.jboss.as.clustering.jgroups">
+				<level name="DEBUG"/>
+			</logger>
 			<logger category="com.wirelust">
 				<level name="DEBUG"/>
 			</logger>
@@ -374,8 +377,10 @@
 					<property name="access_key">${jboss.jgroups.s3.key}</property>
 					<property name="secret_access_key">${jboss.jgroups.s3.secret}</property>
 					<property name="location">${jboss.jgroups.s3.bucket}</property>
+					<!--
 					<property name="prefix">wildfly/</property>
-					<property name="timeout">60000</property>
+					-->
+					<property name="timeout">2000</property>
 				</protocol>
 
 				<protocol type="MERGE2"/>
@@ -567,7 +572,7 @@
 			</security-domains>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:transactions:2.0">
-			<core-environment>
+			<core-environment node-identifier="node1">
 				<process-id>
 					<uuid/>
 				</process-id>
