@@ -21,13 +21,12 @@
 
 			<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan-s3.xml"/>
 
-			<property name="hibernate.search.default.locking_strategy" value="single" />
-			<property name="hibernate.search.​default.​exclusive_index_use" value="true"/>
+			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.execution" value="sync"/>
 			<property name="hibernate.search.default.index_flush_interval" value="1000"/>
-			<property name="hibernate.search.default.worker.thread_pool.size" value="5"/>
+			<property name="hibernate.search.default.worker.thread_pool.size" value="20"/>
 			<property name="hibernate.search.default.chunk_size" value="128000"/>
-			<property name="hibernate.search.default.indexwriter.merge_factor" value="2"/>
+			<property name="hibernate.search.default.indexwriter.merge_factor" value="40"/>
 			<property name="hibernate.search.default.indexwriter.merge_max_size" value="1024"/>
 			<property name="hibernate.search.default.indexwriter.ram_buffer_size" value="256"/>
 
