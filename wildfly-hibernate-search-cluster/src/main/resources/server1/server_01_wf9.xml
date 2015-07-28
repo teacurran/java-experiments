@@ -328,7 +328,6 @@
 						<property name="access_key">${jboss.jgroups.s3.key}</property>
 						<property name="secret_access_key">${jboss.jgroups.s3.secret}</property>
 						<property name="location">${jboss.jgroups.s3.bucket}</property>
-						<property name="timeout">2000</property>
 					</protocol>
 
 					<protocol type="MERGE3"/>
@@ -341,7 +340,9 @@
 					</protocol>
 					<protocol type="UNICAST3"/>
 					<protocol type="pbcast.STABLE"/>
-					<protocol type="pbcast.GMS"/>
+					<protocol type="pbcast.GMS">
+						<property name="join_timeout">3000</property>
+					</protocol>
 					<protocol type="MFC"/>
 					<protocol type="FRAG2"/>
 					<protocol type="RSVP"/>
@@ -389,11 +390,6 @@
                 </acceptors>
 
                 <broadcast-groups>
-                    <broadcast-group name="bg-udp">
-                        <jgroups-stack>udp</jgroups-stack>
-                        <jgroups-channel>hq-cluster</jgroups-channel>
-                        <connector-ref>http-connector</connector-ref>
-                    </broadcast-group>
                     <broadcast-group name="bg-s3">
                         <jgroups-stack>tcp-s3</jgroups-stack>
                         <jgroups-channel>hq-cluster</jgroups-channel>
@@ -402,10 +398,6 @@
                 </broadcast-groups>
 
                 <discovery-groups>
-                    <discovery-group name="dg-udp">
-                        <jgroups-stack>udp</jgroups-stack>
-                        <jgroups-channel>hq-cluster</jgroups-channel>
-                    </discovery-group>
                     <discovery-group name="dg-s3">
                         <jgroups-stack>tcp-s3</jgroups-stack>
                         <jgroups-channel>hq-cluster</jgroups-channel>
@@ -416,7 +408,7 @@
                     <cluster-connection name="my-cluster">
                         <address>jms</address>
                         <connector-ref>http-connector</connector-ref>
-                        <discovery-group-ref discovery-group-name="dg-group1"/>
+                        <discovery-group-ref discovery-group-name="dg-s3"/>
                     </cluster-connection>
                 </cluster-connections>
 
@@ -541,7 +533,7 @@
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:transactions:3.0">
-            <core-environment node-identifier="${jboss.node.id}">
+            <core-environment node-identifier="${jboss.node.name}">
                 <process-id>
                     <uuid/>
                 </process-id>
