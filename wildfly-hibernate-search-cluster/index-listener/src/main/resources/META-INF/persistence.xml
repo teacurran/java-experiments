@@ -19,7 +19,7 @@
 					  value="java:jboss/infinispan/container/hibernateSearch"/>
 					  -->
 
-			<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>
+			<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan-s3.xml"/>
 
 			<property name="hibernate.search.default.locking_strategy" value="single" />
 			<property name="hibernate.search.​default.​exclusive_index_use" value="true"/>
