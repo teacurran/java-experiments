@@ -21,8 +21,8 @@
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 
 		<version.arquillian>1.1.5.Final</version.arquillian>
 		<version.deltaspike>1.4.1</version.deltaspike>
