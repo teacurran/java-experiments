@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.wirelust.experiments.session-clustering-test</groupId>
+	<artifactId>application</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<packaging>war</packaging>
+
+	<scm>
+		<connection>scm:git:https://github.com/teacurran/java-experiments.git</connection>
+		<developerConnection>scm:git:https://github.com/teacurran/java-experiments.git</developerConnection>
+		<url>scm:git:https://github.com/teacurran/java-experiments.git</url>
+	</scm>
+
+	<properties>
+		<build.number>SNAPSHOT</build.number>
+		<build.timestamp>${maven.build.timestamp}</build.timestamp>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<version.arquillian>1.1.5.Final</version.arquillian>
+		<version.deltaspike>1.4.1</version.deltaspike>
+		<version.ee7>1.0.2.Final</version.ee7>
+		<version.findbugs>3.0.0</version.findbugs>
+		<version.hibernate>4.3.10.Final</version.hibernate>
+		<version.hibernate.search>5.2.0.Final</version.hibernate.search>
+		<version.maven.compiler>2.5.1</version.maven.compiler>
+		<version.maven.war>2.6</version.maven.war>
+		<version.junit>4.12</version.junit>
+		<version.slf4j>1.7.12</version.slf4j>
+		<version.wildfly>8.2.0.Final</version.wildfly>
+	</properties>
+
+	<modules>
+		<module>application</module>
+		<module>index-listener</module>
+		<module>core</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-7.0</artifactId>
+				<version>${version.ee7}</version>
+				<type>pom</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${version.resteasy}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${version.arquillian}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian</groupId>
+			<artifactId>arquillian-bom</artifactId>
+			<version>${version.arquillian}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>${version.arquillian}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-depchain</artifactId>
+			<scope>test</scope>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${version.slf4j}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-embedded</artifactId>
+			<version>${version.wildfly}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+
+						<archive>
+							<manifestEntries>
+								<Specification-Title>${project.name}</Specification-Title>
+								<Specification-Version>${project.version}</Specification-Version>
+								<Implementation-Version>${build.number}</Implementation-Version>
+								<Implementation-Build>${buildNumber}</Implementation-Build>
+							</manifestEntries>
+						</archive>
+						<webappDirectory>${webapp.dir}</webappDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<timestampFormat>yyyyMMddHHmmssSSS</timestampFormat>
+					<timestampPropertyName>releaseTimestamp</timestampPropertyName>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
