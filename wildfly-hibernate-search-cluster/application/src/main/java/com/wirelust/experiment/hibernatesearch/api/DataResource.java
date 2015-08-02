@@ -52,7 +52,7 @@ import java.util.List;
  * @author T. Curran
  */
 @Path("/data")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class DataResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataResource.class);

@@ -15,6 +15,7 @@
 			<module name="org.jboss.remoting-jmx" services="export"/>
 
 			<module name="org.jboss.resteasy.resteasy-cdi"/>
+			<module name="org.jboss.resteasy.resteasy-jaxb-provider"/>
 			<module name="org.jboss.resteasy.resteasy-jackson2-provider"/>
 			<module name="org.jboss.resteasy.resteasy-jaxrs"/>
 			<module name="org.jboss.resteasy.resteasy-multipart-provider"/>
