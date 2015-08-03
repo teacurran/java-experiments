@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<ui:insert name="viewMetadata"/>
+	<h:head>
+		<h:outputScript name="jquery/jquery.js" library="primefaces" />
+		<link href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo" rel="stylesheet" type="text/css"/>
+	</h:head>
+
+	<body>
+
+		<p:dataTable value="#{sessionBean.list}" var="_entry">
+			<p:column sortBy="#{_entry.key}">
+				<f:facet name="header">
+					<h:outputText value="Key"/>
+				</f:facet>
+				#{_entry.key}
+			</p:column>
+
+			<p:column sortBy="#{_entry.value}">
+				<f:facet name="header">
+					<h:outputText value="Value"/>
+				</f:facet>
+				#{_entry.value}
+			</p:column>
+		</p:dataTable>
+
+		<p:panel header="Add New Value">
+			<h:form>
+				<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+					<h:outputText value="Key:"/>
+					<p:inputText required="true" label="Key" value="#{sessionBean.key}"/>
+
+					<h:outputText value="Value:"/>
+					<p:inputText required="true" label="Key" value="#{sessionBean.value}"/>
+				</h:panelGrid>
+
+				<p:commandButton value="Add Entry" ajax="false" action="#{sessionBean.addValue}" />
+			</h:form>
+		</p:panel>
+	</body>
+
+</f:view>
+</html>
