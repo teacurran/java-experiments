@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<head>
+		<title>Application Status</title>
+	</head>
+	<body>
+
+		<h2>Application Status</h2>
+
+		<table>
+			<tr>
+				<td>Application:</td>
+				<td>#{serverStatsService.getVersionAttribute('product_name')}</td>
+			</tr>
+			<tr>
+				<td>Version:</td>
+				<td>#{serverStatsService.getVersionAttribute('product_version')}</td>
+			</tr>
+			<tr>
+				<td>Build Number:</td>
+				<td>#{serverStatsService.getVersionAttribute('build_number')}</td>
+			</tr>
+			<tr>
+				<td>Built By:</td>
+				<td>#{serverStatsService.getVersionAttribute('built_by')}</td>
+			</tr>
+			<tr>
+				<td>Build JVM:</td>
+				<td>#{serverStatsService.getVersionAttribute('build_jvm')}</td>
+			</tr>
+			<tr>
+				<td>Build Time:</td>
+				<td>#{serverStatsService.getVersionAttribute('build_date')}</td>
+			</tr>
+			<tr>
+				<td>Host:</td>
+				<td>#{serverStatsService.hostName}</td>
+			</tr>
+			<tr>
+				<td>Git Commit SHA:</td>
+				<td>#{serverStatsService.getVersionAttribute('git_commit_sha')}</td>
+			</tr>
+			<tr>
+				<td>jboss.node.name:</td>
+				<td>#{serverStatsService.getSystemProperty('jboss.node.name')}</td>
+			</tr>
+		</table>
+
+	</body>
+</html>
+		

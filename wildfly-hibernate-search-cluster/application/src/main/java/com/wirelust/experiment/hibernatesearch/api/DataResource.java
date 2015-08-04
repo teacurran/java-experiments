@@ -1,26 +1,9 @@
 package com.wirelust.experiment.hibernatesearch.api;
 
-import com.wirelust.experiment.hibernatesearch.model.City;
-import com.wirelust.experiment.hibernatesearch.repositories.CityRepository;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.lucene.search.Query;
-import org.hibernate.search.FullTextSession;
-import org.hibernate.search.MassIndexer;
-import org.hibernate.search.SearchFactory;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.FullTextQuery;
-import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
-import org.hibernate.search.stat.Statistics;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.hornetq.api.core.management.MessageCounterInfo;
-import org.hornetq.api.core.management.ObjectNameBuilder;
-import org.hornetq.api.jms.management.JMSQueueControl;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -34,17 +17,31 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.List;
+
+import com.wirelust.experiment.hibernatesearch.model.City;
+import com.wirelust.experiment.hibernatesearch.repositories.CityRepository;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.lucene.search.Query;
+import org.hibernate.search.MassIndexer;
+import org.hibernate.search.SearchFactory;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.search.stat.Statistics;
+import org.hornetq.api.core.management.MessageCounterInfo;
+import org.hornetq.api.core.management.ObjectNameBuilder;
+import org.hornetq.api.jms.management.JMSQueueControl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Date: 09-Jul-2015
