@@ -3,7 +3,6 @@ package com.wirelust.experiment.sessioncluster;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -55,7 +54,7 @@ public class SessionBean implements Serializable {
 		this.value = value;
 	}
 
-	public class KeyValue {
+	public class KeyValue implements Serializable {
 		String key;
 		String value;
 

@@ -54,7 +54,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-
 		<!-- Provided -->
 		<dependency>
 			<groupId>org.jboss.spec</groupId>

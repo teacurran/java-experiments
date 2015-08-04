@@ -9,5 +9,6 @@
 		<param-value>html : text/html, json : application/json, xml : application/xml</param-value>
 	</context-param>
 
+	<distributable/>
 
 </web-app>

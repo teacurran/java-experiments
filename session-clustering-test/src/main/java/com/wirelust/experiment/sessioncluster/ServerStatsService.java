@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import com.wirelust.experiment.sessioncluster.qualifiers.ClasspathResource;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author T. Curran
  */
 @Named
+@Singleton
 public class ServerStatsService implements Serializable {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServerStatsService.class);
