@@ -15,20 +15,24 @@ Infinispan modules can be downloaded here: http://infinispan.org/download/
 === To run the servers
 
 server 1: +
+....
  ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=0 \+
  -Djboss.node.name=server1 \+
  -b 127.0.0.1 \+
  -u 230.0.0.4
+....
 
--b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
+ -b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
 
 server 2: +
+....
  ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=100 \+
  -Djboss.node.name=server2 \+
  -b 127.0.0.1 \+
  -u 230.0.0.4
+....
 
 You can run both servers with the same installation of Wildfly but you must have a unique basedir.
 The easiest way to do this is copy the standalone directory and then add the following to startup: +
