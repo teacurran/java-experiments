@@ -1,5 +1,4 @@
-Wildfly Hibernate Search With Clustering
-======================
+= Wildfly Hibernate Search With Clustering
 
 The point of this experiment is to:
 
@@ -7,30 +6,33 @@ The point of this experiment is to:
 * have hibernate search events going to a JMS Queue
 * have an indexer application writing the lucene index to Infinispan
 
-Setup
-------------------
+== Setup
+
 This configuration requires Wildfly 8.0+ with Infinispan 7.2 modules installed.
 
-Infinispan modules can be downloaded here:
-http://infinispan.org/download/
+Infinispan modules can be downloaded here: http://infinispan.org/download/
 
-To run the servers
-------------------
+=== To run the servers
+
 server 1: +
+....
  ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=0 \+
  -Djboss.node.name=server1 \+
  -b 127.0.0.1 \+
  -u 230.0.0.4
+....
 
--b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
+ -b 127.0.0.1 -u 230.0.0.4 -Djboss.socket.binding.port-offset=100 -Dnodename=node2 -Djboss.node.name=srv2
 
 server 2: +
+....
  ./standalone.sh -server-config server_01_wf9.xml \+
  -Djboss.socket.binding.port-offset=100 \+
  -Djboss.node.name=server2 \+
  -b 127.0.0.1 \+
  -u 230.0.0.4
+....
 
 You can run both servers with the same installation of Wildfly but you must have a unique basedir.
 The easiest way to do this is copy the standalone directory and then add the following to startup: +
@@ -45,8 +47,7 @@ JGroups will fail to link them. For some reason my IDE was running IPv6 and the 
 can use the following command line switch: +
 -Djava.net.preferIPv4Stack=true
 
-Application
--------------------
+== Application
 
 http://127.0.0.1:8080/application/api/v1/data/bootstrap
 
