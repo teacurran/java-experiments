@@ -321,7 +321,16 @@
 				<stack name="tcp-jdbc">
 					<transport type="TCP" socket-binding="jgroups-tcp"/>
 					<protocol type="JDBC_PING">
+                    <property name="connection_driver">com.mysql.jdbc.Driver</property>
+                    <property name="connection_url">jdbc:mysql://127.0.0.1:3306/devops</property>
+                    <property name="connection_username">root</property>
+                    <property name="connection_password">root</property>
+
+					<!-- using a JNDI datasource can't be used because will only work if the
+					datasources subsystem starts before jgroups. Since there is no subsystem
+					dependency it will be non-deterministic and only work some fo the time.
 						<property name="datasource_jndi_name">java:jboss/datasources/DevopsDs</property>
+					-->
 						<property name="initialize_sql">
 							CREATE TABLE JGROUPSPING (
 							   application varchar(200) NOT NULL,
