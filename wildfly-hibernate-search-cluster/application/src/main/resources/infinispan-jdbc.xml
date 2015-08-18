@@ -16,10 +16,9 @@
 		<jmx domain="app.infinispan" duplicate-domains="true"/>
 
 		<replicated-cache name="LuceneIndexesMetadata" mode="SYNC" remote-timeout="25000">
-			<transaction mode="NONE"/>
-			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
-			<indexing index="NONE"/>
 			<locking striping="false" acquire-timeout="10000" concurrency-level="500" write-skew="false"/>
+			<transaction mode="NONE"/>
+
 			<eviction max-entries="-1" strategy="NONE"/>
 			<expiration max-idle="-1"/>
 
@@ -31,13 +30,14 @@
 					<write-behind/>
 				</file-store>
 			</persistence>
+
+			<indexing index="NONE"/>
+			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
 		</replicated-cache>
 
 		<distributed-cache name="LuceneIndexesData" mode="SYNC" remote-timeout="25000">
-			<transaction mode="NONE"/>
-			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
-			<indexing index="NONE"/>
 			<locking striping="false" acquire-timeout="10000" concurrency-level="500" write-skew="false"/>
+			<transaction mode="NONE"/>
 			<eviction max-entries="-1" strategy="NONE"/>
 			<expiration max-idle="-1"/>
 
@@ -49,15 +49,19 @@
 					<write-behind/>
 				</file-store>
 			</persistence>
+
+			<indexing index="NONE"/>
+			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
 		</distributed-cache>
 
 		<replicated-cache name="LuceneIndexesLocking" mode="SYNC" remote-timeout="25000">
-			<transaction mode="NONE"/>
-			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
-			<indexing index="NONE"/>
 			<locking striping="false" acquire-timeout="10000" concurrency-level="500" write-skew="false"/>
+			<transaction mode="NONE"/>
 			<eviction max-entries="-1" strategy="NONE"/>
 			<expiration max-idle="-1"/>
+
+			<indexing index="NONE"/>
+			<state-transfer enabled="true" timeout="480000" await-initial-transfer="true"/>
 		</replicated-cache>
 	</cache-container>
 
