@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * @author T. Curran
  */
 @Path("/data")
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces(MediaType.APPLICATION_JSON)
 public class DataResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataResource.class);
@@ -110,7 +110,8 @@ public class DataResource {
 		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 		fullTextEntityManager.flushToIndexes();
 
-		MassIndexer indexer = fullTextEntityManager.createIndexer(City.class);
+		MassIndexer indexer = fullTextEntityManager.createIndexer(City.class)
+			.batchSizeToLoadObjects(100);
 		indexer.startAndWait();
 
 		return Response.status(Response.Status.NO_CONTENT).build();

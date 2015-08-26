@@ -18,8 +18,7 @@
 			<property name="hibernate.search.infinispan.cachemanager_jndiname"
 					  value="java:jboss/infinispan/container/hibernateSearch"/>
 					  -->
-
-			<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan-s3.xml"/>
+			<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan-jdbc.xml"/>
 
 			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.execution" value="sync"/>

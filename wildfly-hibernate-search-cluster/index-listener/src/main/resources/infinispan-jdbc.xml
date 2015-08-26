@@ -5,13 +5,13 @@
 	xmlns="urn:infinispan:config:7.2">
 
 	<jgroups>
-		<stack-file name="infinispan-udp" path="infinispan-jgroups-udp.xml"/>
+		<stack-file name="infinispan-jdbc" path="infinispan-jgroups-jdbc.xml"/>
 	</jgroups>
 
 	<cache-container name="HibernateSearch"
 					 default-cache="LuceneIndexesData" statistics="false" shutdown-hook="DONT_REGISTER">
 
-		<transport stack="infinispan-udp"/>
+		<transport stack="infinispan-jdbc"/>
 
 		<jmx domain="app.infinispan" duplicate-domains="true"/>
 

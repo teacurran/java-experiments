@@ -23,7 +23,7 @@
 
 			<property name="hibernate.search.default.locking_strategy" value="none" />
 			<property name="hibernate.search.default.worker.backend" value="jms" />
-			<property name="hibernate.search.default.worker.jms.connection_factory" value="java:/JmsXA"/>
+			<property name="hibernate.search.default.worker.jms.connection_factory" value="java:/ConnectionFactory"/>
 			<property name="hibernate.search.default.worker.jms.queue" value="/queue/HibernateSearch"/>
 			<property name="hibernate.search.default.worker.execution" value="sync"/>
 			<property name="hibernate.search.default.index_flush_interval" value="1000"/>

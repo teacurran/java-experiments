@@ -7,7 +7,7 @@
 				use-java-context="true" jta="true">
 		<connection-url>jdbc:mysql://localhost:3306/searchexperiment</connection-url>
 
-		<driver>mysql-connector-java-5.1.35-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
+		<driver>com.mysql</driver>
 		<security>
 			<user-name>root</user-name>
 			<password>root</password>
