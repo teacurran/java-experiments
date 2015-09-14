@@ -15,13 +15,12 @@
 	</h:head>
 
 	<body>
-
-		<h:form>
+		<h:form id="mainForm">
 			Node Name: #{serverStatsService.nodeName}<br/>
-			Post Construct Value: #{sessionBean.postConstructDate}<br/>
-			Post Construct Transient Value: #{sessionBean.transientDate}<br/><br/>
+			Post Construct Value: #{viewBean.postConstructDate}<br/>
+			Post Construct Transient Value: #{viewBean.transientDate}<br/><br/>
 
-			<p:dataTable value="#{sessionBean.list}" var="_entry">
+			<p:dataTable value="#{viewBean.list}" var="_entry">
 				<p:column sortBy="#{_entry.key}">
 					<f:facet name="header">
 						<h:outputText value="Key"/>
@@ -38,19 +37,18 @@
 			</p:dataTable>
 
 			<p:panel header="Add New Value">
-					<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
-						<h:outputText value="Key:"/>
-						<p:inputText required="true" label="Key" value="#{sessionBean.key}"/>
+				<h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+					<h:outputText value="Key:"/>
+					<p:inputText required="true" label="Key" value="#{viewBean.key}"/>
 
-						<h:outputText value="Value:"/>
-						<p:inputText required="true" label="Key" value="#{sessionBean.value}"/>
-					</h:panelGrid>
+					<h:outputText value="Value:"/>
+					<p:inputText required="true" label="Key" value="#{viewBean.value}"/>
+				</h:panelGrid>
 
-					<p:commandButton value="Add Entry" ajax="false" action="#{sessionBean.addValue}" />
+				<p:commandButton value="Add Entry" ajax="true" action="#{viewBean.addValue}" update="mainForm"/>
 			</p:panel>
 
 		</h:form>
-
 	</body>
 
 </f:view>

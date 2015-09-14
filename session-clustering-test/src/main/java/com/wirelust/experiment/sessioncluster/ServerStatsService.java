@@ -46,6 +46,10 @@ public class ServerStatsService implements Serializable {
 		return hostName;
 	}
 
+	public String getNodeName() {
+		return System.getProperty("jboss.node.name");
+	}
+
 	public String getSystemProperty(String attribute) {
 		return System.getProperty(attribute);
 	}

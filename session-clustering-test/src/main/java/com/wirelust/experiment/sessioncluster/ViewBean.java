@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -14,8 +14,8 @@ import javax.inject.Named;
  * @author T. Curran
  */
 @Named
-@SessionScoped
-public class SessionBean implements Serializable {
+@ViewScoped
+public class ViewBean implements Serializable {
 
 	HashMap<String, KeyValue> hashMap = new HashMap<>();
 
