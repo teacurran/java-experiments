@@ -346,9 +346,10 @@
 						<property name="connection_username">root</property>
 						<property name="connection_password">root</property>
 
-						<!-- using a JNDI datasource can't be used because will only work if the
-						datasources subsystem starts before jgroups. Since there is no subsystem
-						dependency it will be non-deterministic and only work some fo the time.
+						<!-- You can't use a JNDI datasource here because that will only work if the
+						datasources subsystem starts before jgroups and stops after. Since there is no subsystem
+						dependency order it will be non-deterministic and only work some of the time. In testing 
+						it usually started okay but threw a stack trace when shutting down the server.
 							<property name="datasource_jndi_name">java:jboss/datasources/DevopsDs</property>
 						-->
 						<property name="initialize_sql">
