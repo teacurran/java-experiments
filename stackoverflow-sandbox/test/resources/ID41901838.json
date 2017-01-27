@@ -1,0 +1,33 @@
+{
+"creationDate": "2017-01-26T23:11:20+01:00",
+"details": [
+    {
+        "RecurringDetail": {
+            "acquirer": "TestPmmAcquirer",
+            "acquirerAccount": "TestPmmAcquirerAccount",
+            "additionalData": {
+                "cardBin": "440000"
+            },
+            "alias": "B133243153928547",
+            "aliasType": "Default",
+            "card": {
+                "expiryMonth": "8",
+                "expiryYear": "2018",
+                "holderName": "Steve HAll",
+                "number": "0008"
+            },
+            "contractTypes": [
+                "RECURRING"
+            ],
+            "creationDate": "2017-01-26T23:11:20+01:00",
+            "firstPspReference": "8524854686798738",
+            "paymentMethodVariant": "visadebit",
+            "recurringDetailReference": "8414854686802111",
+            "variant": "visa"
+        }
+    }
+],
+"invalidOneclickContracts": "false",
+"lastKnownShopperEmail": "someones@email.com",
+"shopperReference": "xggZcGauSSG5jP+akIlijQ=="
+}

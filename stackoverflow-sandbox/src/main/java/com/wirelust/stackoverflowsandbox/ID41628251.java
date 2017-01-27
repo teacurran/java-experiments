@@ -20,8 +20,8 @@ public class ID41628251 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ID41628251.class);
 
 	private String getContentDescription(MultipartFile file, Long contentCategoryId) {
-		try (InputStream inputStream = file.getInputStream(); BufferedReader br = new BufferedReader(new
-				InputStreamReader(inputStream, "UTF-8"))) {
+		try (InputStream inputStream = file.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
 			StringBuilder sb = new StringBuilder();
 
 			String line;
