@@ -1,42 +1,38 @@
 package com.wirelust.stackoverflowsandbox.ID41901838;
 
-import java.util.Date;
-import java.util.List;
+	import java.util.Date;
+	import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
-public class RecurringDetail implements java.io.Serializable {
-	private static final long serialVersionUID = 5302883242997268343L;
+	public class RecurringDetail implements java.io.Serializable {
+		private static final long serialVersionUID = 5302883242997268343L;
 
 
-	private String name;
-	private Date creationDate;
-	private Card card;
-	private AdditionalData additionalData;
-	private String socialSecurityNumber;
-	private String recurringDetailReference;
-	private String alias;
-	private String aliasType;
-	private String variant;
-	private String paymentMethodVariant;
-	private String firstPspReference;
-	private List<String> contractTypes;
-	private String acquirer;
-	private String acquirerAccount;
+		private String name;
+		private Date creationDate;
+		private Card card;
+		private AdditionalData additionalData;
+		private String socialSecurityNumber;
+		private String recurringDetailReference;
+		private String alias;
+		private String aliasType;
+		private String variant;
+		private String paymentMethodVariant;
+		private String firstPspReference;
+		private List<String> contractTypes;
+		private String acquirer;
+		private String acquirerAccount;
 
-	public class AdditionalData {
-		String cardBin;
+		public class AdditionalData {
+			String cardBin;
 
-		public String getCardBin() {
-			return cardBin;
+			public String getCardBin() {
+				return cardBin;
+			}
+
+			public void setCardBin(String cardBin) {
+				this.cardBin = cardBin;
+			}
 		}
-
-		public void setCardBin(String cardBin) {
-			this.cardBin = cardBin;
-		}
-	}
 
 	public String getName() {
 		return this.name;

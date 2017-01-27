@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class RecurringDetailsResult implements java.io.Serializable {
-	private static final long serialVersionUID = 5297684963950973136L;
+
 	private Date creationDate;
 	private String shopperReference;
 	private List<RecurringDetailWrapper> details;
